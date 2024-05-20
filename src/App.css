@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+.container{
+  border:solid blue;
+  padding:2em;
+  margin:1em;
+  border-radius:10px;
+  display:flex;
+  justify-content: space-evenly;
+}
+.btnContainer{
+  border:solid green;
+  background-color: green;
+  color:white;
+  width:100%;
+  align-items: center;
+  display:flex;
+  justify-content: space-evenly;
+}
+.btn{
+  border:solid white;
+  width:15%;
+  border-radius:22px;
+  border-width:.6px;
+}
+.btn:hover{
+  border:solid white;
+  width:15%;
+  border-radius:22px;
+  border-width:.6px;
+  color:black;
+  background-color: peachpuff;
+}
+.formContainer{
+  /* border:double #333C3F; */
+  border-width: 8px;
+  margin:1em;
+  padding:1em;
+  display:flex;
+  justify-content: space-evenly;
+}
+form{
+  display:flex; 
+}
+.formAdmin{
+  border:solid black;
+  margin:2em;
+  padding:10px;
+}
+.noteTitle{
+  text-align:right;
+  font-family:cinzel;
+  font-size:42px;
+  margin:1em;
+}
