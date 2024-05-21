@@ -10,25 +10,20 @@ function App() {
     title: "",
     body: "",
   });
-  // =================Create/AddNew Form Logic
 
   const [updateForm, setUpdateForm] = useState({
     _id: null,
     title: "",
     body: "",
   });
-
-  // =================Update Form Logic
   // --------------------[State]
-
-  // --- -- [CRUD] -> Get data from DB bring it in as state and distrubute  throughout App -----
 
   // -------------------------------------[CREATE]
   const createNote = async (e) => {
     e.preventDefault();
     // 1. Create Note
     const res = await axios.post("http://localhost:3001/notes", createForm);
-    // Add 2nd arg to pass data , {}
+    // 1a.) Add 2nd arg to pass data , {}
     console.log("CreatedNote : ", res);
 
     // 2. Update State
@@ -44,35 +39,36 @@ function App() {
 
   // -------------------------------------[READ]
   const fetchNotes = async () => {
+    //  1.Make Request
     const response = await axios({
       method: "get",
       url: "/notes",
     });
     const info = await response.data;
-    // Set to State
+    // 2. Save as State
     await setNotes(info.notes);
     console.log("Notes FETCHED");
   };
-
   // -------------------------------------[UPDATE]
   const updateCreateFormField = (e) => {
     const { name, value } = e.target;
     console.log({ name, value });
-
-    // update State
+    // Destructure Values from event target
     setCreateForm(() => ({
       ...createForm,
       [name]: value,
-      // updates name key to whatever name var is equal to.
+      //[whatever var name is equal to ]: value is reassigned
     }));
+    // update State
   };
 
   const handleUpdateFieldChange = (e) => {
     const { value, name } = e.target;
-
+    // Destructure Values from event target
     setUpdateForm(() => ({
       ...updateForm,
       [name]: value,
+      //[whatever var name is equal to ]: value is reassigned
     }));
   };
 
@@ -88,9 +84,7 @@ function App() {
   };
 
   const updateNote = async (e) => {
-    console.log("Updating Note ");
     e.preventDefault();
-
     // Destructure Note
     const { title, body } = updateForm;
     // Send the update request by using the updateForm state
@@ -98,7 +92,6 @@ function App() {
       `http://localhost:3001/notes/${updateForm._id}`,
       { title, body }
     );
-
     console.log(res);
 
     // Update State
@@ -110,17 +103,15 @@ function App() {
     });
 
     newNotes[noteIndex] = res.data.note;
-    // update Note
-
+    // reassigning value of Note
     setNotes(newNotes);
-    // Clear Form
 
-    
     setUpdateForm({
       _id: null,
       title: "",
       body: "",
     });
+    // Clear Form so form_reuse
   };
   // -------------------------------------[DELETE]
   const deleteNote = async (_id) => {
@@ -144,7 +135,6 @@ function App() {
   return (
     <div className="App">
       <h1 className="noteTitle">Notes DashBoard</h1>
-
       <div className="formAdmin">
         <div className="formContainer">
           <h2> + New Note</h2>
@@ -163,10 +153,11 @@ function App() {
           </form>
         </div>
         <hr />
-        {/* ----------------------------------------{form_split: } */}
+        {/* -------> {form_split: } */}
+
+        {/* update Ternary -> if form is active, display updateForm component */}
         {updateForm._id && (
           <>
-            {/* if update Form is active and note_id = event.target */}
             <div className="formContainer">
               <h2> Update Note</h2>
               <form onSubmit={updateNote}>
@@ -186,15 +177,8 @@ function App() {
           </>
         )}
       </div>
-
-      {/* <div className="btnContainer">
-        <div className="btn">GET</div>
-        <div className="btn">POST</div>
-        <div className="btn">PUT</div>
-        <div className="btn">DELETE</div>
-      </div> */}
-
-      {/* If there are not notes, [THEN] render Index, ifnot[ELSE] render Note */}
+      
+      {/* Notes ternary -> [IF] notes = true, [THEN] render Index,[ELSE] render Note component */}
       {notes ? (
         <Index info={notes} deleteFunc={deleteNote} editFunc={toggleUpdate} />
       ) : (

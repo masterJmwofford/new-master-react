@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: lightblue;
+  color:blue;
 }
 
 .App-logo {
@@ -38,10 +40,10 @@
 }
 
 .container{
-  border:solid blue;
-  padding:2em;
+  border:solid #333C3F;
   margin:1em;
   border-radius:10px;
+  border-width:.2px;  
   display:flex;
   justify-content: space-evenly;
 }
@@ -80,7 +82,7 @@ form{
   display:flex; 
 }
 .formAdmin{
-  border:solid black;
+  /* border:solid black; */
   margin:2em;
   padding:10px;
 }
